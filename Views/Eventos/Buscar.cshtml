@@ -1,0 +1,41 @@
+@using Primeira_ATV_MVC.ViewModels
+
+@model BuscaEventoViewModel
+@{
+    ViewData["Title"] = "Buscar Evento";
+}
+
+<h1>Buscar Alunos</h1>
+
+<form asp-action="Buscar" method="post">
+    <input asp-for="NomeBusca" placeholder="Nome do evento..."/>
+    <button type="submit">Buscar</button>
+</form>
+
+@if (Model.Resultados.Any())
+{
+    <table>
+        <tr>
+        <th>Nome: </th>
+        <th>Descrição: </th>
+        <th>Local: </th>
+        <th>Data do evento: </th>
+        <th>Quantidade de vagas: </th>
+        <th>Valor do ingresso: </th>
+    </tr>
+    @foreach(Evento e in Model.Resultados)
+    {
+        <tr>
+            <td>@e.Nome</td>
+            <td>@e.Descricao.</td>
+            <td>@e.Local</td>
+            <td>@e.DataEvento</td>
+            <td>@e.QuantidadeVagas</td>
+            <td>@e.ValorIngresso</td>
+            <td>
+                <a asp-action="Detalhes" asp-route-id="@e.Id">Ver</a>
+            </td>
+        </tr>
+    }
+    </table>
+}
